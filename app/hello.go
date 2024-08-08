@@ -2,19 +2,39 @@ package main
 
 import "fmt"
 
-const suffix = " SAY WHAT!?!"
-const reverseResponse = "YOU GOT ME "
+const defaultSuffix = " SAY WHAT!?!"
+const reverseSuffix = " GOT ME?!? AHHH!"
+const whaSuffix = " YOUR SO DUMB HAHAHAhHHAH"
+
 const reverse = "no u"
+const wha = "wha..."
+const defaultName = "Dummy"
 
 func main() {
 	fmt.Println(SayWhat("hello", ""))
 }
 
-func SayWhat(s string, s2 string) string {
-	if s2 == reverse {
-		return reverseResponse + s + "!"
-	} else if s == "" {
-		return "Dummy" + suffix
+func getSuffix(response string) (suffix string) {
+	switch response {
+	case reverse:
+		suffix = reverseSuffix
+	case wha:
+		suffix = whaSuffix
+	default:
+		suffix = defaultSuffix
 	}
-	return s + suffix
+	return
+}
+
+func getName(nameInput string) (name string) {
+	if nameInput == "" {
+		name = defaultName
+	} else {
+		name = nameInput
+	}
+	return
+}
+
+func SayWhat(nameInput string, response string) string {
+	return getName(nameInput) + getSuffix(response)
 }
